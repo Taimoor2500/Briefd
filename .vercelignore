@@ -1,0 +1,3 @@
+# Keep secrets off deployment uploads when using `vercel deploy`
+.env
+.env.*
