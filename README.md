@@ -33,6 +33,10 @@ Open [http://localhost:3000](http://localhost:3000), paste updates, click Genera
 
 **Rejected approach:** I considered a multi-step pipeline (parse → extract entities → classify → summarise) rather than a single prompt. Rejected because a well-constrained single prompt is easier to debug, cheaper, and the classification step adds latency without meaningfully improving faithfulness. The Zod schema + post-hoc sourceId verification gives us most of the reliability benefit without the complexity.
 
+**Time breakdown (approximate):**
+
+Started with the data model and parser before touching the AI at all — getting the types right felt like the foundation everything else would sit on. Probably spent more time on the system prompt than anything else, faithfulness is easy to claim and hard to actually enforce so I kept pushing on it until results were satisfactory, The eval harness came out of that, once I had a failure mode I understood, I wanted a way to catch it automatically rather than manually checking every time. UI went faster than expected because the data model was already solid. The README took time on its own; the questions are genuinely hard to answer well as even before starting my decisions were based on it (good brain exercise) and I rewrote most of them at least twice. Last stretch was edge cases and polish, rate limiting, duplicate input caching, fixing the diff logic tagging shipped items as still open, making the Slack export not leak asterisks.
+
 ---
 
 ### 2. Where is the AI in the system, and why there?
